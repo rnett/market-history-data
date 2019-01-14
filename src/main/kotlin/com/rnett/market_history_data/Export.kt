@@ -1,15 +1,16 @@
 package com.rnett.market_history_data
 
-import com.google.gson.Gson
 import com.rnett.core.get
 import com.rnett.core.launchInAndJoinAll
-import com.rnett.market_history_data.TypeData.Companion.data
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.*
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.cbor.CBOR
+import kotlinx.serialization.dumps
 import kotlinx.serialization.internal.IntSerializer
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
+import kotlinx.serialization.map
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
@@ -48,9 +49,10 @@ object ExportHistoryData{
             }
         }
 
-        println("Exporting big CBOR file")
-        if(bigFile != null)
+        if (bigFile != null) {
             exportLargeFile(bigFile)
+            println("Exporting big CBOR file")
+        }
 
     }
 
