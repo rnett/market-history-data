@@ -66,7 +66,7 @@ object GetInterestingItems {
         println("${types.size} interesting types")
 
         File(args[0]).writeText(
-            Gson().toJson(types)
+            Gson().toJson(types.associateWith { usefulTypes[it] })
         )
 
     }
