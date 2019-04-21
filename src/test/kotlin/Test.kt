@@ -1,7 +1,7 @@
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.cbor.CBOR
-import kotlinx.serialization.dumps
+import kotlinx.serialization.dump
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.stringify
 
@@ -25,8 +25,8 @@ fun main(args: Array<String>) {
 
     println("Test 1 (data class):")
 
-    val j1 = JSON.plain.stringify(t).length
-    val c1 = CBOR.plain.dumps(t).length
+    val j1 = JSON.plain.stringify(t).toByteArray().size
+    val c1 = CBOR.plain.dump(t).size
 
     println("JSON length: $j1")
     println("CBOR length: $c1")
@@ -34,8 +34,8 @@ fun main(args: Array<String>) {
 
     println("Test 2 (data class w/ list):")
 
-    val j2 = JSON.plain.stringify(t2).length
-    val c2 = CBOR.plain.dumps(t2).length
+    val j2 = JSON.plain.stringify(t2).toByteArray().size
+    val c2 = CBOR.plain.dump(t2).size
 
     println("JSON length: $j2")
     println("CBOR length: $c2")

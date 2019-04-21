@@ -12,7 +12,7 @@ buildscript{
 }
 
 plugins {
-    kotlin("jvm") version "1.3.11"
+    kotlin("jvm") version "1.3.21"
     `maven-publish`
 }
 
@@ -30,11 +30,11 @@ repositories {
     jcenter()
 }
 
-val ktor_version = "1.1.1"
+val ktor_version = "1.1.4"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0")
+    //api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0")
     api("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.9.1")
 
     api("com.github.salomonbrys.kotson:kotson:2.5.0")
@@ -45,8 +45,11 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-apache:$ktor_version")
 
+    implementation("com.github.rnett:launchpad:1.2.2")
+    implementation("com.github.rnett:sde:6af45d81bc")
 
-    api("org.jetbrains.exposed:exposed:0.11.2")
+
+    api("org.jetbrains.exposed:exposed:0.13.6")
 }
 
 tasks.withType<KotlinCompile> {

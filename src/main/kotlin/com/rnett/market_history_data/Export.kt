@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.cbor.CBOR
-import kotlinx.serialization.dumps
 import kotlinx.serialization.internal.IntSerializer
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
@@ -60,7 +59,7 @@ object ExportHistoryData{
         val data = HistoryData.allByType()
         File(file).apply{
             createNewFile()
-            writeText(CBOR.plain.dumps(IntSerializer mapWith HistoryData.serializer().list, data))
+            writeBytes(CBOR.plain.dump(IntSerializer mapWith HistoryData.serializer().list, data))
         }
     }
 
@@ -94,7 +93,7 @@ object ExportHistoryData{
                             writeText(JSON.plain.stringify(HistoryData.serializer().list, data))
                         }
                         ExportType.CBOR -> {
-                            writeText(CBOR.plain.dumps(HistoryData.serializer().list, data))
+                            writeBytes(CBOR.plain.dump(HistoryData.serializer().list, data))
                         }
                     }
                 }
@@ -133,7 +132,7 @@ object ExportHistoryData{
                             writeText(JSON.plain.stringify((IntSerializer to HistoryData.serializer()).map, data))
                         }
                         ExportType.CBOR -> {
-                            writeText(CBOR.plain.dumps((IntSerializer to HistoryData.serializer()).map, data))
+                            writeBytes(CBOR.plain.dump((IntSerializer to HistoryData.serializer()).map, data))
                         }
                     }
                 }
